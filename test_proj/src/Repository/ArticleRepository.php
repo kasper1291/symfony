@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Article;
+use App\Utils\Paginator;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
@@ -44,7 +45,12 @@ class ArticleRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
-
+    final public function getArticleList(int $page) : Paginator
+    {
+        $qb = $this->createQueryBuilder('article')
+            ->orderBy('article.created_at', 'DESC');
+        return (new Paginator($qb))->pagination($page);
+    }
     // /**
     //  * @return Article[] Returns an array of Article objects
     //  */

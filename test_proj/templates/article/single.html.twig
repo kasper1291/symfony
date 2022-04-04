@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ArticleController!{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h2>List of articles</h2>
+        <a href="{{ path('create_article') }}">Create article</a>
+
+            <div class="card bg-success text-white">
+                <div class="card-body">
+                    <div>Title: {{ article.title }}</div>
+                    <br>
+                    <div>Author: {{ article.author }}</div>
+                    <br>
+                    <div>Content: <br> {{ article.content }}</div>
+                    <br>
+                    <div>Content: <br> {{ article.createdAt|date("F jS \\a\\t g:ia") }}</div>
+                    <br>
+                    <div>image: <br>
+                        <img src="{{ asset('uploads/image/' ~ article.image) }}" class="img-fluid" alt="Responsive image">
+
+                        </div>
+                    <br>
+                    <div class="text-white bg-white"><a href="{{ path('article_delete', {'article':article.id}) }}">delete</a></div>
+                </div>
+            </div>
+    </div>
+{% endblock %}
